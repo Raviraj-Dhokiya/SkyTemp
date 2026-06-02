@@ -1,7 +1,13 @@
 import axios from "axios";
 
+// In dev: Vite proxy forwards /api → localhost:5000
+// In production (Vercel): VITE_API_URL = https://your-backend.onrender.com
+const BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api/weather`
+  : "/api/weather";
+
 const api = axios.create({
-  baseURL: "/api/weather",
+  baseURL: BASE,
   timeout: 10000,
 });
 
